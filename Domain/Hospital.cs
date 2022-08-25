@@ -1,6 +1,6 @@
 namespace Domain;
 
-public class Hospital
+public record Hospital
 {
     public int HospitalId { get; set; }
     public string Name { get; set; } = "";

@@ -21,7 +21,7 @@ public class HospitalRepository : IHospitalRepository
     public async Task AddAsync(Hospital hospital)
     {
         await _connection.OpenAsync();
-        await _connection.QueryAsync<HospitalDto>(
+        await _connection.QueryAsync(
             @"INSERT INTO Hospitals
             (
                 Name
@@ -39,7 +39,7 @@ public class HospitalRepository : IHospitalRepository
     public async Task DeleteAsync(int hospitalId)
     {
         await _connection.OpenAsync();
-        await _connection.QueryAsync<HospitalDto>(
+        await _connection.QueryAsync(
             @"DELETE FROM Hospitals
             WHERE HospitalID = @HospitalId;",
             new
@@ -60,5 +60,20 @@ public class HospitalRepository : IHospitalRepository
                 Hospitals;");
 
         return _mapper.Map<IEnumerable<Hospital>>(dtos);
+    }
+
+    public async Task PutAsync(Hospital hospital)
+    {
+        await _connection.OpenAsync();
+        await _connection.QueryAsync(
+            @"UPDATE Hospitals
+            SET
+                Name = @Name
+            WHERE HospitalID = @HospitalId;",
+            new
+            {
+                hospital.Name,
+                hospital.HospitalId
+            });
     }
 }

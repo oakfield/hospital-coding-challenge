@@ -43,4 +43,15 @@ public class HospitalController : ControllerBase
     {
         return await _hospitalService.GetAsync();
     }
+
+    [Route("/{hospitalId}")]
+    [HttpPut]
+    public async Task PutAsync(int hospitalId, PutHospitalRequest putHospitalRequest)
+    {
+        var hospital = _mapper.Map<Hospital>(putHospitalRequest) with
+        {
+            HospitalId = hospitalId
+        };
+        await _hospitalService.PutAsync(hospital);
+    }
 }

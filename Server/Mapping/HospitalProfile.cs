@@ -9,5 +9,6 @@ public class HospitalProfile : Profile
     public HospitalProfile()
     {
         CreateMap<AddHospitalRequest, Hospital>();
+        CreateMap<PutHospitalRequest, Hospital>();
     }
 }

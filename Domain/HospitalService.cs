@@ -25,4 +25,9 @@ public class HospitalService : IHospitalService
     {
         return await _repository.GetAsync();
     }
+
+    public async Task PutAsync(Hospital hospital)
+    {
+        await _repository.PutAsync(hospital);
+    }
 }
