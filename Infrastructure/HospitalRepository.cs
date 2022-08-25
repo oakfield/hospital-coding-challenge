@@ -72,7 +72,8 @@ public class HospitalRepository : IHospitalRepository
             @"UPDATE Hospitals
             SET
                 Name = @Name
-            WHERE HospitalID = @HospitalId;",
+            WHERE
+                HospitalID = @HospitalId;",
             new
             {
                 hospital.Name,
