@@ -75,10 +75,10 @@ function HospitalView() {
             {showAddHospitalForm ?
                 <>
                 <div
-                    className="add-hospital-form-shadow"
+                    className="hospital-form-shadow"
                     onClick={() => setShowAddHospitalForm(false)}>
                 </div>
-                <form className="add-hospital-form" >
+                <form className="hospital-form" >
                     <button
                         className="close-hospital-form-button"
                         onClick={() => setShowAddHospitalForm(false)}
@@ -113,10 +113,10 @@ function HospitalView() {
             {showEditHospitalForm ?
                 <>
                 <div
-                    className="add-hospital-form-shadow"
+                    className="hospital-form-shadow"
                     onClick={() => setShowEditHospitalForm(false)}>
                 </div>
-                <form className="add-hospital-form" >
+                <form className="hospital-form" >
                     <button
                         className="close-hospital-form-button"
                         onClick={() => setShowEditHospitalForm(false)}
