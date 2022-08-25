@@ -20,6 +20,9 @@ services:
     build:
       context: .
       dockerfile: Server/Dockerfile
+    ports:
+      - '5000:80'
+      - '5001:443'
 # Names our volume
 volumes:
   my-db:

@@ -7,7 +7,7 @@ function App() {
   const [hospitals, setHospitals] = useState([]);
 
   useEffect(() => {
-    const apiUrl = `https://localhost:54041/Hospitals`;
+    const apiUrl = `https://localhost:5001/Hospitals`;
     fetch(apiUrl)
       .then((res) => res.json())
       .then((hospitals) => {
