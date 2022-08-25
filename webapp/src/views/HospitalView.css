@@ -1,15 +1,30 @@
 .hospital-view {
     display: grid;
-    gap: 2ch;
-    grid-template-columns: repeat(3, max-content);
+    grid-template-rows: repeat(2, max-content);
     padding: 2ch;
 }
 
-.hospital-view .cell {
+.hospital-view .add-hospital-button {
+    background-color: purple;
+    border: 0px;
+    color: white;
+    font-size: 2rem;
+    height: 3ch;
+    justify-self: end;
+    width: 3ch;
+}
+
+.hospital-view .hospital-table {
+    display: grid;
+    gap: 2ch;
+    grid-template-columns: repeat(3, max-content);
+}
+
+.hospital-view .hospital-table .cell {
     justify-self: start;
 }
 
-.hospital-view .header {
+.hospital-view .hospital-table .header {
     font-size: 1.5rem;
 }
 
