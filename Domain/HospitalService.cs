@@ -11,7 +11,7 @@ public class HospitalService : IHospitalService
         _repository = repository;
     }
 
-    public async Task<Hospital> GetAsync()
+    public async Task<IEnumerable<Hospital>> GetAsync()
     {
         return await _repository.GetAsync();
     }

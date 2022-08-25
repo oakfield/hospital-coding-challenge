@@ -20,7 +20,7 @@ public class HospitalController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Hospital> Get()
+    public async Task<IEnumerable<Hospital>> Get()
     {
         return await _hospitalService.GetAsync();
     }

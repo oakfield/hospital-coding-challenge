@@ -1,5 +1,8 @@
-﻿using Domain;
+﻿using AutoMapper;
+using Dapper;
+using Domain;
 using Domain.Interfaces;
+using Infrastructure.Models;
 using MySqlConnector;
 
 namespace Infrastructure;
@@ -7,34 +10,25 @@ namespace Infrastructure;
 public class HospitalRepository : IHospitalRepository
 {
     private readonly MySqlConnection _connection;
+    private readonly IMapper _mapper;
 
-    public HospitalRepository(MySqlConnection connection)
+    public HospitalRepository(MySqlConnection connection, IMapper mapper)
     {
         _connection = connection;
+        _mapper = mapper;
     }
 
-    public async Task<Hospital> GetAsync()
+    public async Task<IEnumerable<Hospital>> GetAsync()
     {
         await _connection.OpenAsync();
-
-        using var command = new MySqlCommand(
+        var dtos = await _connection.QueryAsync<HospitalDto>(
             @"SELECT
                 HospitalID,
                 Name,
                 CreatedAt
             FROM
-                Hospitals;",
-            _connection);
-        using var reader = await command.ExecuteReaderAsync();
+                Hospitals;");
 
-        var hospital = new Hospital();
-        while (await reader.ReadAsync())
-        {
-            hospital.HospitalId = int.Parse(reader.GetValue(0).ToString());
-            hospital.Name = reader.GetValue(1).ToString();
-            hospital.CreatedAt = DateTimeOffset.Parse(reader.GetValue(2).ToString());
-        }
-
-        return hospital;
+        return _mapper.Map<IEnumerable<Hospital>>(dtos);
     }
 }

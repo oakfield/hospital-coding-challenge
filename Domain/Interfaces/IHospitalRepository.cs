@@ -2,5 +2,5 @@
 
 public interface IHospitalRepository
 {
-    Task<Hospital> GetAsync();
+    Task<IEnumerable<Hospital>> GetAsync();
 }
