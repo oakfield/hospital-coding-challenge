@@ -17,8 +17,24 @@ public class HospitalRepository : IHospitalRepository
     {
         await _connection.OpenAsync();
 
-        using var command = new MySqlCommand("SELECT field FROM table;", _connection);
+        using var command = new MySqlCommand(
+            @"SELECT
+                HospitalID,
+                Name,
+                CreatedAt
+            FROM
+                Hospitals;",
+            _connection);
+        using var reader = await command.ExecuteReaderAsync();
 
-        return new Hospital();
+        var hospital = new Hospital();
+        while (await reader.ReadAsync())
+        {
+            hospital.HospitalId = int.Parse(reader.GetValue(0).ToString());
+            hospital.Name = reader.GetValue(1).ToString();
+            hospital.CreatedAt = DateTimeOffset.Parse(reader.GetValue(2).ToString());
+        }
+
+        return hospital;
     }
 }
