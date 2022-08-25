@@ -36,6 +36,18 @@ public class HospitalRepository : IHospitalRepository
             });
     }
 
+    public async Task DeleteAsync(int hospitalId)
+    {
+        await _connection.OpenAsync();
+        await _connection.QueryAsync<HospitalDto>(
+            @"DELETE FROM Hospitals
+            WHERE HospitalID = @HospitalId;",
+            new
+            {
+                HospitalId = hospitalId
+            });
+    }
+
     public async Task<IEnumerable<Hospital>> GetAsync()
     {
         await _connection.OpenAsync();

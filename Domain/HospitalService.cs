@@ -16,6 +16,11 @@ public class HospitalService : IHospitalService
         await _repository.AddAsync(hospital);
     }
 
+    public async Task DeleteAsync(int hospitalId)
+    {
+        await _repository.DeleteAsync(hospitalId);
+    }
+
     public async Task<IEnumerable<Hospital>> GetAsync()
     {
         return await _repository.GetAsync();

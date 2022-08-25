@@ -31,6 +31,13 @@ public class HospitalController : ControllerBase
         await _hospitalService.AddAsync(hospital);
     }
 
+    [Route("/{hospitalId}")]
+    [HttpDelete]
+    public async Task DeleteAsync(int hospitalId)
+    {
+        await _hospitalService.DeleteAsync(hospitalId);
+    }
+
     [HttpGet]
     public async Task<IEnumerable<Hospital>> GetAsync()
     {
