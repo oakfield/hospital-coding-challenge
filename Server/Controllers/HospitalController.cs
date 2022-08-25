@@ -1,3 +1,5 @@
+using Domain;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers;
@@ -6,20 +8,20 @@ namespace Server.Controllers;
 [Route("[controller]")]
 public class HospitalController : ControllerBase
 {
+    private readonly IHospitalService _hospitalService;
     private readonly ILogger<HospitalController> _logger;
 
-    public HospitalController(ILogger<HospitalController> logger)
+    public HospitalController(
+        IHospitalService hospitalService,
+        ILogger<HospitalController> logger)
     {
+        _hospitalService = hospitalService;
         _logger = logger;
     }
 
     [HttpGet]
-    public IEnumerable<Hospital> Get()
+    public async Task<Hospital> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new Hospital
-        {
-            Name = "Test"
-        })
-        .ToArray();
+        return await _hospitalService.GetAsync();
     }
 }

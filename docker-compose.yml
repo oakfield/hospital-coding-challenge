@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  mysql:
+    container_name: hospital_db
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+      - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+  redis:
+   container_name: hospital-redis
+   image: redis
+  server:
+    build:
+      context: .
+      dockerfile: Server/Dockerfile
+# Names our volume
+volumes:
+  my-db:
+
