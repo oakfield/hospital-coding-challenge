@@ -8,15 +8,15 @@ namespace Server.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class HospitalController : ControllerBase
+public class HospitalsController : ControllerBase
 {
     private readonly IHospitalService _hospitalService;
-    private readonly ILogger<HospitalController> _logger;
+    private readonly ILogger<HospitalsController> _logger;
     private readonly IMapper _mapper;
 
-    public HospitalController(
+    public HospitalsController(
         IHospitalService hospitalService,
-        ILogger<HospitalController> logger,
+        ILogger<HospitalsController> logger,
         IMapper mapper)
     {
         _hospitalService = hospitalService;

@@ -1,7 +1,7 @@
 type Hospital = {
     hospitalId: number;
     name: string;
-    createdAt: Date;
+    createdAt: string;
 };
 
 export default Hospital;

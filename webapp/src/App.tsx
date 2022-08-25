@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import HospitalView from './views/HospitalView';
 import Hospital from './types/Hospital';
 
 function App() {
-  let hospitals = [
-    {
-      hospitalId: 1,
-      name: 'Test',
-      createdAt: new Date()
-    }
-  ] as Hospital[];
+  const [loading, setLoading] = useState(true);
+  const [hospitals, setHospitals] = useState([]);
+
+  useEffect(() => {
+    const apiUrl = `https://localhost:54041/Hospitals`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((hospitals) => {
+        setLoading(false);
+        setHospitals(hospitals);
+      });
+  }, [setLoading, setHospitals]);
 
   return (
     <div className="App">

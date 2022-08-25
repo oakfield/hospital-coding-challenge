@@ -1,7 +1,7 @@
 type HospitalProps = {
     hospitalId: number;
     name: string;
-    createdAt: Date;
+    createdAt: string;
 };
 
 export default HospitalProps;

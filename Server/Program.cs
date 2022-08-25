@@ -14,7 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+var corsPolicy = "policy";
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicy,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000");
+        });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,6 +38,7 @@ builder.Services.AddScoped<IHospitalService, HospitalService>();
 builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
 
 var app = builder.Build();
+app.UseCors(corsPolicy);
 
 
 // Configure the HTTP request pipeline.

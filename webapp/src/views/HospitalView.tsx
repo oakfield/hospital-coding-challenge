@@ -2,6 +2,11 @@ import Hospital from "../components/Hospital";
 import HospitalViewProps from "./HospitalViewProps";
 
 function HospitalView(props: HospitalViewProps) {
+    if (!props.hospitals.length)
+    {
+        return <div>Let's add your first hospital</div>;
+    }
+
     return (
         <div className="hospital-view">
             {props.hospitals.map(hospital =>

@@ -5,7 +5,7 @@ function Hospital(props: HospitalProps) {
         <div className="hospital">
             <div>{props.hospitalId}</div>
             <div>{props.name}</div>
-            <div>{props.createdAt.toDateString()}</div>
+            <div>{props.createdAt}</div>
         </div>
     )
 }
