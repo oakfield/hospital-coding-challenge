@@ -34,6 +34,7 @@ public class HospitalRepository : IHospitalRepository
             {
                 hospital.Name
             });
+        await _connection.CloseAsync();
     }
 
     public async Task DeleteAsync(int hospitalId)
@@ -46,6 +47,7 @@ public class HospitalRepository : IHospitalRepository
             {
                 HospitalId = hospitalId
             });
+        await _connection.CloseAsync();
     }
 
     public async Task<IEnumerable<Hospital>> GetAsync()
@@ -58,6 +60,7 @@ public class HospitalRepository : IHospitalRepository
                 CreatedAt
             FROM
                 Hospitals;");
+        await _connection.CloseAsync();
 
         return _mapper.Map<IEnumerable<Hospital>>(dtos);
     }
@@ -75,5 +78,6 @@ public class HospitalRepository : IHospitalRepository
                 hospital.Name,
                 hospital.HospitalId
             });
+        await _connection.CloseAsync();
     }
 }
