@@ -42,9 +42,8 @@ const editHospital = async (hospitalId: number, name: string) => {
 };
 
 const getHospitals = async (): Promise<Hospital[]> => {
-    const apiUrl = baseUrl;
-    return fetch(apiUrl)
-      .then((res) => res.json());
+    var response = await fetch(baseUrl);
+    return response.json();
 }
 
 export { addHospital, deleteHospital, editHospital, getHospitals };
