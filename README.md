@@ -5,10 +5,17 @@ A solution for managing hospitals.
 
 ## Running locally
 
-First, start the data stores, Redis and MySQL. Run the following command from the root of the repository:
+First, back end, which consists of a .NET server and MySQL. Run the following command from the root of the repository:
 
 ```
 docker compose up -d
+```
+
+Then start the front end server.
+
+```
+cd webapp
+npm start
 ```
 
 ## Notes
