@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import HospitalView from './views/HospitalView';
-import Hospital from './types/Hospital';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -19,6 +18,7 @@ function App() {
 
   return (
     <div className="App">
+      <header>Hospital Web App</header>
       <HospitalView hospitals={hospitals} />
     </div>
   );

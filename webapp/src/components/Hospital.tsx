@@ -1,4 +1,5 @@
 import HospitalProps from "./HospitalProps";
+import './Hospital.css';
 
 function Hospital(props: HospitalProps) {
     return (

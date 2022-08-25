@@ -1,0 +1,18 @@
+.hospital-view {
+    display: grid;
+    gap: 2ch;
+    grid-template-columns: repeat(3, max-content);
+    padding: 2ch;
+}
+
+.hospital-view .cell {
+    justify-self: start;
+}
+
+.hospital-view .header {
+    font-size: 1.5rem;
+}
+
+.hospital-view .zero-state {
+    font-size: 1.5rem;
+}
