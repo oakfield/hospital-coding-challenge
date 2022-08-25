@@ -8,26 +8,88 @@
     background-color: purple;
     border: 0px;
     color: white;
-    font-size: 2rem;
+    font-size: 2.5rem;
     height: 3ch;
     justify-self: end;
     width: 3ch;
 }
 
-.hospital-view .hospital-table {
-    display: grid;
-    gap: 2ch;
-    grid-template-columns: repeat(3, max-content);
+.hospital-view .hospital-table th {
+    padding-bottom: 1rem;
+    text-align: left;
 }
 
-.hospital-view .hospital-table .cell {
-    justify-self: start;
+.hospital-view .hospital-table tr {
+    height: 8ch;
 }
 
 .hospital-view .hospital-table .header {
     font-size: 1.5rem;
 }
 
+.hospital-view .hospital-table .delete-button {
+    border: 0;
+    color: #222;
+    font-size: 1.5rem;
+}
+
 .hospital-view .zero-state {
     font-size: 1.5rem;
+}
+
+.add-hospital-form {
+    background-color: royalblue;
+    color: white;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    height: calc(30vw - 10ch);
+    left: 50%;
+    padding: 2ch;
+    position: fixed;
+    top: 50%;
+    width: calc(50vw - 10ch);
+    transform: translate(-50%, -50%);
+}
+
+.add-hospital-form-shadow {
+    background-color: #000000cc;
+    content: '';
+    position: fixed;
+    height: 100vw;
+    width: 100vw;
+}
+
+.add-hospital-form label {
+    padding: 2ch;
+}
+
+.add-hospital-form label input {
+    margin-left: 2ch;
+    width: 50ch;
+}
+
+.add-hospital-form legend {
+    font-size: 1.5rem;
+    margin-bottom: 3ch;
+}
+
+.add-hospital-form .submit-hospital-form-button {
+    background-color: purple;
+    border: 0;
+    color: white;
+    font-size: 1.5rem;
+    height: 3ch;
+    justify-self: center;
+    margin-top: 2ch;
+    width: 12ch;
+}
+
+.close-hospital-form-button {
+    background-color: transparent;
+    color: white;
+    border: 0;
+    font-size: 2ch;
+    justify-self: right;
+    width: 2ch;
+    height: 2ch;
 }
