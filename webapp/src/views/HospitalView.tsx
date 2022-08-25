@@ -6,7 +6,9 @@ function HospitalView() {
     const [loading, setLoading] = useState(true);
     const [hospitals, setHospitals] = useState<Hospital[]>([]);
     const [showAddHospitalForm, setShowAddHospitalForm] = useState(false);
+    const [showEditHospitalForm, setShowEditHospitalForm] = useState(false);
     const [newHospitalName, setNewHospitalName] = useState('');
+    const [currentHospital, setCurrentHospital] = useState<Hospital | null>(null);
       
     useEffect(() => {
         getHospitals().then(hospitals => {
@@ -43,7 +45,19 @@ function HospitalView() {
                                         }}
                                         title="Delete hospital"
                                         type="button">
-                                            x
+                                            ✖
+                                    </button>
+                                </td>
+                                <td className="cell">
+                                    <button
+                                        className="edit-button"
+                                        onClick={() => {
+                                            setCurrentHospital(hospital);
+                                            setShowEditHospitalForm(true);
+                                        }}
+                                        title="Edit hospital"
+                                        type="button">
+                                            🖊
                                     </button>
                                 </td>
                             </tr>
@@ -70,7 +84,7 @@ function HospitalView() {
                         onClick={() => setShowAddHospitalForm(false)}
                         type="button"
                         >
-                            x
+                            ✖
                     </button>
                     <fieldset>
                         <legend>Add new hospital</legend>
@@ -96,6 +110,44 @@ function HospitalView() {
                 </>
                 : null
             }
+            {showEditHospitalForm ?
+                <>
+                <div
+                    className="add-hospital-form-shadow"
+                    onClick={() => setShowEditHospitalForm(false)}>
+                </div>
+                <form className="add-hospital-form" >
+                    <button
+                        className="close-hospital-form-button"
+                        onClick={() => setShowEditHospitalForm(false)}
+                        type="button"
+                        >
+                            ✖
+                    </button>
+                    <fieldset>
+                        <legend>Edit hospital {currentHospital?.hospitalId}</legend>
+                        <label>
+                            Name
+                            <input
+                                onChange={event => setNewHospitalName(event.target.value)}
+                                value={newHospitalName} />
+                        </label>
+                    </fieldset>
+                    <button
+                        className="submit-hospital-form-button"
+                        onClick={async () => {
+                            await editHospital(currentHospital!.hospitalId, newHospitalName);
+                            var hospitals = await getHospitals();
+                            setHospitals(hospitals);
+                            setShowEditHospitalForm(false);
+                        }}
+                        type="button">
+                        Submit
+                    </button>
+                </form>
+                </>
+                : null
+            }
         </>
     );
 }
@@ -105,6 +157,20 @@ const addHospital = async (name: string) => {
         'https://localhost:5001/Hospitals',
         {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name
+            })
+        });
+};
+
+const editHospital = async (hospitalId: number, name: string) => {
+    await fetch(
+        `https://localhost:5001/Hospitals/${hospitalId}`,
+        {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
