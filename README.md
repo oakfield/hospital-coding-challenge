@@ -11,10 +11,11 @@ First, back end, which consists of a .NET server and MySQL. Run the following co
 docker compose up -d
 ```
 
-Then start the front end server.
+Then install the front end packages and start the web server.
 
 ```
 cd webapp
+npm install
 npm start
 ```
 
