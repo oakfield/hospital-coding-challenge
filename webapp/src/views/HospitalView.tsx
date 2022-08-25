@@ -1,6 +1,7 @@
 import './HospitalView.css';
 import { useEffect, useState } from "react";
 import Hospital from '../types/Hospital';
+import { addHospital, deleteHospital, editHospital, getHospitals } from '../services/HospitalService';
 
 function HospitalView() {
     const [loading, setLoading] = useState(true);
@@ -152,49 +153,6 @@ function HospitalView() {
     );
 }
 
-const addHospital = async (name: string) => {
-    await fetch(
-        'https://localhost:5001/Hospitals',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name
-            })
-        });
-};
 
-const editHospital = async (hospitalId: number, name: string) => {
-    await fetch(
-        `https://localhost:5001/Hospitals/${hospitalId}`,
-        {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name
-            })
-        });
-};
-
-const deleteHospital = async (hospitalId: number) => {
-    await fetch(
-        `https://localhost:5001/Hospitals/${hospitalId}`,
-        {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-};
-
-const getHospitals = async (): Promise<Hospital[]> => {
-    const apiUrl = `https://localhost:5001/Hospitals`;
-    return fetch(apiUrl)
-      .then((res) => res.json());
-}
 
 export default HospitalView;
