@@ -48,12 +48,11 @@
     color: white;
     display: grid;
     grid-template-rows: min-content auto min-content;
-    height: calc(30vw - 10ch);
+    min-height: 15rem;
     left: 50%;
     padding: 2ch;
     position: fixed;
     top: 50%;
-    width: calc(50vw - 10ch);
     transform: translate(-50%, -50%);
 }
 
@@ -61,7 +60,7 @@
     background-color: #000000cc;
     content: '';
     position: fixed;
-    height: 100vw;
+    height: 100vh;
     width: 100vw;
 }
 
