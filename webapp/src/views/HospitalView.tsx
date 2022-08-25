@@ -1,15 +1,24 @@
-import HospitalViewProps from "./HospitalViewProps";
 import './HospitalView.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Hospital from '../types/Hospital';
 
-function HospitalView(props: HospitalViewProps) {
+function HospitalView() {
+    const [loading, setLoading] = useState(true);
+    const [hospitals, setHospitals] = useState<Hospital[]>([]);
     const [showAddHospitalForm, setShowAddHospitalForm] = useState(false);
     const [newHospitalName, setNewHospitalName] = useState('');
+      
+    useEffect(() => {
+        getHospitals().then(hospitals => {
+            setLoading(false);
+            setHospitals(hospitals);
+        });
+      }, [setLoading, setHospitals]);
     
     return (
         <>
             <div className="hospital-view">
-                {!props.hospitals.length
+                {!hospitals.length
                     ? 
                     <div className="zero-state">
                         Let's add your first hospital
@@ -19,7 +28,7 @@ function HospitalView(props: HospitalViewProps) {
                         <th className="header cell">ID</th>
                         <th className="header cell">Name</th>
                         <th className="header cell">Created At</th>
-                        {props.hospitals.map(hospital =>
+                        {hospitals.map(hospital =>
                             <tr key={hospital.hospitalId}>
                                 <td className="cell">{hospital.hospitalId}</td>
                                 <td className="cell">{hospital.name}</td>
@@ -27,7 +36,11 @@ function HospitalView(props: HospitalViewProps) {
                                 <td className="cell">
                                     <button
                                         className="delete-button"
-                                        onClick={() => deleteHospital(hospital.hospitalId)}
+                                        onClick={async () => {
+                                            await deleteHospital(hospital.hospitalId);
+                                            var hospitals = await getHospitals();
+                                            setHospitals(hospitals);
+                                        }}
                                         title="Delete hospital"
                                         type="button">
                                             x
@@ -72,6 +85,8 @@ function HospitalView(props: HospitalViewProps) {
                         className="submit-hospital-form-button"
                         onClick={async () => {
                             await addHospital(newHospitalName);
+                            var hospitals = await getHospitals();
+                            setHospitals(hospitals);
                             setShowAddHospitalForm(false);
                         }}
                         type="button">
@@ -109,5 +124,11 @@ const deleteHospital = async (hospitalId: number) => {
             }
         });
 };
+
+const getHospitals = async (): Promise<Hospital[]> => {
+    const apiUrl = `https://localhost:5001/Hospitals`;
+    return fetch(apiUrl)
+      .then((res) => res.json());
+}
 
 export default HospitalView;
