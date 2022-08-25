@@ -1,7 +1,10 @@
 CREATE DATABASE Hospital;
+USE Hospital;
 
-CREATE IF NOT EXISTS TABLE Hospitals (
+CREATE TABLE Hospitals (
     HospitalID INT AUTO_INCREMENT PRIMARY KEY,
-    "Name" VARCHAR(50) NOT NULL,
+    Name VARCHAR(50) NOT NULL,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO Hospitals (Name) VALUES ('Test Hospital');
