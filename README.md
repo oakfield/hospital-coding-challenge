@@ -1,2 +1,2 @@
-# hospital-coding-challenge
+# Hospital Coding Challenge
 Coding challenge for AHTG
