@@ -18,6 +18,24 @@ public class HospitalRepository : IHospitalRepository
         _mapper = mapper;
     }
 
+    public async Task AddAsync(Hospital hospital)
+    {
+        await _connection.OpenAsync();
+        await _connection.QueryAsync<HospitalDto>(
+            @"INSERT INTO Hospitals
+            (
+                Name
+            )
+            VALUES
+            (
+                @Name
+            );",
+            new
+            {
+                hospital.Name
+            });
+    }
+
     public async Task<IEnumerable<Hospital>> GetAsync()
     {
         await _connection.OpenAsync();
